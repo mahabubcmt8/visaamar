@@ -51,7 +51,7 @@ class HomeController extends Controller
     {
         $pageTitle = companyInfo()->site_mettro;
         $contact = Contact::all();
-        return view('frontend.contact-us', compact('pageTitle', 'contact'));
+        return view('frontend.contact', compact('pageTitle', 'contact'));
     }
 
     public function gallary()

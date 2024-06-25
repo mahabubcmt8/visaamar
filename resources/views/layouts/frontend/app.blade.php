@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
 
-<!-- Mirrored from demo-egenslab.b-cdn.net/html/triprex/preview/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jun 2024 07:19:12 GMT -->
-
 <head>
 
     <meta charset="utf-8">
@@ -34,8 +32,8 @@
 
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
 
-    <title>TripRex - Tour & Travel Agency HTML Template</title>
-    <link rel="icon" href="{{ asset('frontend/img/sm-logo.svg') }}" type="image/gif" sizes="20x20">
+    <title>{{ companyInfo()->company_name ?? '' }}</title>
+    <link rel="icon" href="{{ asset('uploads/system').'/'. companyInfo()->website_logo }}" type="image/gif" sizes="20x20">
 </head>
 
 <body>

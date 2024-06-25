@@ -13,16 +13,9 @@
             </div>
         </div>
         <ul class="menu-list">
-            <li class="menu-item-has-children active">
-                <a href="#" class="drop-down">Home</a></i>
-                {{-- <ul class="sub-menu">
-                    <li><a href="index.html">Home 01</a></li>
-                    <li class="active"><a href="javascript::">Home 02</a></li>
-                    <li><a href="javascritp::">Home 03</a></li>
-                    <li><a href="javascritp::">Home 04</a></li>
-                    <li><a href="javascritp::">Home 05</a></li>
-                    <li><a href="javascritp::">Home 06</a></li>
-                </ul> --}}
+
+            <li>
+                <a href="{{ route('home') }}" class="drop-down active">Home</a>
             </li>
             <li>
                 <a href="about.html" class="drop-down">About</a>
@@ -145,7 +138,7 @@
                 </ul>
             </li>
             <li>
-                <a href="contact.html" class="drop-down">Contact</a>
+                <a href="{{ route('contact_us') }}" class="drop-down">Contact</a>
             </li>
         </ul>
         <div class="topbar-right d-lg-none d-block">
