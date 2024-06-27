@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\AboutSectionController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\DivisionControllelr;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\UpozilaController;
@@ -150,16 +151,16 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     });
 
     // Rank Routes
-    Route::prefix('rank')->as('rank.')->group(function () {
-        Route::get('/', [RankController::class, 'index'])->name('index');
-        Route::get('/create', [RankController::class, 'create'])->name('create');
-        Route::post('/store', [RankController::class, 'store'])->name('store');
-        Route::get('/edit/{id}', [RankController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}', [RankController::class, 'update'])->name('update');
-        Route::get('/destroy/{id}', [RankController::class, 'destroy'])->name('destroy');
-        Route::get('/rank/users', [RankController::class, 'rankUsers'])->name('users');
-        Route::get('/rank/users/give/{rank_name}/{username}', [RankController::class, 'rankGive'])->name('give.user.rank');
-    });
+    // Route::prefix('rank')->as('rank.')->group(function () {
+    //     Route::get('/', [RankController::class, 'index'])->name('index');
+    //     Route::get('/create', [RankController::class, 'create'])->name('create');
+    //     Route::post('/store', [RankController::class, 'store'])->name('store');
+    //     Route::get('/edit/{id}', [RankController::class, 'edit'])->name('edit');
+    //     Route::post('/update/{id}', [RankController::class, 'update'])->name('update');
+    //     Route::get('/destroy/{id}', [RankController::class, 'destroy'])->name('destroy');
+    //     Route::get('/rank/users', [RankController::class, 'rankUsers'])->name('users');
+    //     Route::get('/rank/users/give/{rank_name}/{username}', [RankController::class, 'rankGive'])->name('give.user.rank');
+    // });
 
     // Leadership Routes
     Route::prefix('leadership')->as('leadership.')->group(function () {
@@ -191,6 +192,17 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
         Route::get('/destroy/{id}', [ClubBonusDetailsController::class, 'destroy'])->name('destroy');
     });
 
+    Route::prefix('tours')->group(function(){
+        Route::get('/index', [TourController::class, 'index'])->name('tour.index');
+        Route::get('/create', [TourController::class, 'create'])->name('tour.create');
+        Route::post('/store', [TourController::class, 'store'])->name('tour.store');
+        Route::get('/edit/{id}', [TourController::class, 'edit'])->name('tour.edit');
+        Route::get('/view/{id}', [TourController::class, 'view'])->name('tour.view');
+        Route::post('/update/{id}',[TourController::class, 'update'])->name('tour.update');
+        Route::get('/delete/{id}', [TourController::class, 'destroy'])->name('tour.delete');
+        Route::get('/tour_active/{id}', [TourController::class, 'active'])->name('tour.active');
+        Route::get('/tour_inactive/{id}', [TourController::class, 'inactive'])->name('tour.in_active');
+    });
     // Comapny settings routes
     Route::prefix('settings')->as('settings.')->group(function () {
         Route::get('/company-info', [ComapanyInfoController::class, 'index'])->name('index');
@@ -212,6 +224,9 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
             Route::post('/about-page/banner/store', [AboutSectionController::class, 'store'])->name('store');
             Route::post('/about-page/banner/update/{id}', [AboutSectionController::class, 'update'])->name('update');
         });
+
+
+
 
 
         Route::prefix('contact')->as('contact.')->group(function () {
@@ -262,14 +277,14 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
 
 
 //        // Country Routes
-//        Route::prefix('country')->as('country.')->group(function () {
-//            Route::get('/', [CountryController::class, 'index'])->name('index');
-//            Route::get('/create', [CountryController::class, 'create'])->name('create');
-//            Route::post('/store', [CountryController::class, 'store'])->name('store');
-//            Route::get('/edit/{id}', [CountryController::class, 'edit'])->name('edit');
-//            Route::post('/update/{id}', [CountryController::class, 'update'])->name('update');
-//            Route::get('/destroy/{id}', [CountryController::class, 'destroy'])->name('destroy');
-//        });
+       Route::prefix('country')->as('country.')->group(function () {
+           Route::get('/', [CountryController::class, 'index'])->name('index');
+           Route::get('/create', [CountryController::class, 'create'])->name('create');
+           Route::post('/store', [CountryController::class, 'store'])->name('store');
+           Route::get('/edit/{id}', [CountryController::class, 'edit'])->name('edit');
+           Route::post('/update/{id}', [CountryController::class, 'update'])->name('update');
+           Route::get('/destroy/{id}', [CountryController::class, 'destroy'])->name('destroy');
+       });
 //
 //        // State Routes
 //        Route::prefix('state')->as('state.')->group(function () {

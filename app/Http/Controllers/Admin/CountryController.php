@@ -51,7 +51,8 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        $pageTitle = 'Country';
+        return view('admin.page.country.create', compact('pageTitle'));
     }
 
     /**

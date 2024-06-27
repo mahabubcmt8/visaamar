@@ -17,7 +17,7 @@
                             <h5>Quick Link</h5>
                         </div>
                         <ul class="widget-list">
-                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="{{ route('about_us') }}">About Us</a></li>
                             <li><a href="destination1.html">Destinations</a></li>
                             <li><a href="package-grid.html">Tour Package</a></li>
                             <li><a href="guide2.html">Tour Guide</a></li>

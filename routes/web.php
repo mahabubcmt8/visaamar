@@ -26,6 +26,9 @@ use App\Http\Controllers\SendMailController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [HomeController::class, 'about'])->name('about_us');
+Route::get('/tours', [HomeController::class, 'tours'])->name('tours');
+Route::get('/tours/{slug}', [HomeController::class, 'tours_details'])->name('tours.details');
+Route::get('/visa', [HomeController::class, 'visa'])->name('visa');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact_us');
 // Route::post('/contact-us/mail/send', [MailController::class, 'index'])->name('contact_us_send_mail');
 Route::post('/contact-us/mail/send', [MailController::class, 'store'])->name('contact_us_store_mail');

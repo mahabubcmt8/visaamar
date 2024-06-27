@@ -9,6 +9,7 @@ use App\Models\AdsBanner;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Product;
+use App\Models\Tour;
 use Devfaysal\BangladeshGeocode\Models\District;
 use Devfaysal\BangladeshGeocode\Models\Division;
 use Devfaysal\BangladeshGeocode\Models\Upazila;
@@ -36,14 +37,34 @@ class HomeController extends Controller
         $addresses = Product::all();
         $contacts = Contact::all();
         $products = Product::orderBy('id', 'desc')->paginate(12);
+        $aboutsection = AboutSection::first();
+        $tours = Tour::latest()->get()->take(12);
 
-        return view('frontend.index', compact('categories', 'contacts', 'addresses', 'divisions', 'upazilas', 'districts', 'latestProduct', 'categories2', 'pageTitle', 'banners', 'products', 'bannersections'));
+        return view('frontend.index', compact(
+            'categories',
+            'contacts',
+            'addresses',
+            'divisions',
+            'upazilas',
+            'districts',
+            'latestProduct',
+            'categories2',
+            'pageTitle',
+            'banners',
+            'products',
+            'bannersections',
+            'aboutsection',
+            'tours'));
     }
 
+    public function visa(){
+        $pageTitle = companyInfo()->site_mettro;
+        return view('frontend.visa', compact('pageTitle'));
+    }
     public function about()
     {
         $pageTitle = companyInfo()->site_mettro;
-        $aboutsection = AboutSection::all();
+        $aboutsection = AboutSection::first();
         return view('frontend.about-us', compact('pageTitle', 'aboutsection'));
     }
 
@@ -52,6 +73,18 @@ class HomeController extends Controller
         $pageTitle = companyInfo()->site_mettro;
         $contact = Contact::all();
         return view('frontend.contact', compact('pageTitle', 'contact'));
+    }
+
+    public function tours(){
+        $pageTitle = companyInfo()->site_mettro;
+        $tours = Tour::latest()->paginate(20);
+        return view('frontend.tours', compact('pageTitle', 'tours'));
+    }
+
+    public function tours_details($slug){
+        $pageTitle = companyInfo()->site_mettro;
+        $tours = Tour::where('slug', $slug)->first();
+        return view('frontend.tours-details', compact('pageTitle', 'tours'));
     }
 
     public function gallary()

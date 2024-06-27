@@ -1,12 +1,12 @@
 
 <header class="header-area style-2">
     <div class="header-logo">
-        <a href="index.html"><img alt="image" class="img-fluid" src="{{ asset('uploads/system').'/'. companyInfo()->website_logo }}" width="50px"></a>
+        <a href="{{ route('home') }}"><img alt="image" class="img-fluid" src="{{ asset('uploads/system').'/'. companyInfo()->website_logo }}" width="50px"></a>
     </div>
     <div class="main-menu">
         <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
             <div class="mobile-logo-wrap">
-                <a href="index.html"><img alt="image" src="{{ asset('frontend/img/logo2.svg') }}"></a>
+                <a href="{{ route('home') }}"><img alt="image" src="{{ asset('uploads/system').'/'. companyInfo()->website_logo }}"></a>
             </div>
             <div class="menu-close-btn">
                 <i class="bi bi-x"></i>
@@ -18,27 +18,15 @@
                 <a href="{{ route('home') }}" class="drop-down active">Home</a>
             </li>
             <li>
-                <a href="about.html" class="drop-down">About</a>
+                <a href="{{ route('about_us') }}" class="drop-down">About</a>
             </li>
-            <li class="menu-item-has-children">
-                <a href="package-grid.html" class="drop-down">Tours</a><i class="bi bi-plus dropdown-icon"></i>
-                <ul class="sub-menu">
-                    <li><a href="package-grid.html">Package Grid</a></li>
-                    <li>
-                        <a href="package-sidebar.html">Package Sidebar</a>
-                    </li>
-                    <li>
-                        <a href="package-top-search.html">Package Top Search</a>
-                    </li>
-                    <li>
-                        <a href="package-category.html">Package Category</a>
-                    </li>
-                    <li>
-                        <a href="package-details.html">Package Details</a>
-                    </li>
-                </ul>
+            <li>
+                <a href="{{ route('visa') }}" class="drop-down">Visa</a>
             </li>
-            <li class="menu-item-has-children">
+            <li>
+                <a href="{{ route('tours') }}" class="drop-down">Tours</a>
+            </li>
+            {{-- <li class="menu-item-has-children">
                 <a href="destination1.html" class="drop-down">Destination</a><i class="bi bi-plus dropdown-icon"></i>
                 <ul class="sub-menu">
                     <li><a href="destination1.html">Destination Style 01</a></li>
@@ -136,7 +124,7 @@
                     <li><a href="faq.html">Faqs</a></li>
                     <li><a href="error.html">Error</a></li>
                 </ul>
-            </li>
+            </li> --}}
             <li>
                 <a href="{{ route('contact_us') }}" class="drop-down">Contact</a>
             </li>
@@ -170,7 +158,7 @@
     </div>
     <div class="nav-right d-flex jsutify-content-end align-items-center">
         <ul class="icon-list">
-            <li class="d-lg-flex d-none">
+            {{-- <li class="d-lg-flex d-none">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#user-login">
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
                         <path d="M26 13.5C26 20.4036 20.4035 26 13.5 26C6.59632 26 1 20.4036 1 13.5C1 6.59632 6.59632 1 13.5 1C20.4035 1 26 6.59632 26 13.5Z" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -178,7 +166,7 @@
                         <path d="M6.04297 23.5324C6.44287 19.7667 9.62917 16.8333 13.5008 16.8333C17.3725 16.8333 20.5588 19.7669 20.9585 23.5325" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-            </li>
+            </li> --}}
             <li class="right-sidebar-button">
                 <svg class="sidebar-toggle-button" width="25" height="25" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.29608 0.0658336C0.609639 0.31147 0.139209 0.899069 0.0432028 1.63598C-0.0144009 2.09353 -0.0144009 5.4939 0.0432028 5.95146C0.129608 6.59686 0.489632 7.11703 1.07047 7.42046L1.36329 7.57458H3.83545H6.30761L6.59563 7.42046C6.96525 7.2278 7.25807 6.93401 7.45008 6.56314L7.60369 6.27416V3.79372V1.31328L7.45008 1.02429C7.25807 0.653433 6.96525 0.359633 6.59563 0.166978L6.30761 0.0128531L3.90745 0.00322056C1.83372 -0.00641251 1.4785 0.00322056 1.29608 0.0658336ZM6.2356 0.802741C6.52842 0.956866 6.65803 1.08209 6.79244 1.34699L6.90765 1.57336V3.80817V6.03816L6.74924 6.29824C6.53322 6.66429 6.2068 6.85694 5.74117 6.90029C5.54916 6.91956 4.55549 6.92437 3.52343 6.91474L1.65131 6.90029L1.41129 6.77025C1.12807 6.62094 1.00807 6.49571 0.854455 6.20191L0.739248 5.98518V3.79372V1.60226L0.854455 1.38552C1.05607 0.995397 1.33929 0.778659 1.74731 0.706413C1.85292 0.687148 2.85618 0.677515 3.97946 0.677515L6.01959 0.687148L6.2356 0.802741Z"></path>
@@ -190,7 +178,7 @@
                 </svg>
             </li>
         </ul>
-        <a href="package-grid.html" class="primary-btn3 d-xl-flex d-none">Book A Trip</a>
+        <a href="#" class="primary-btn3 d-xl-flex d-none">Book A Trip</a>
         <div class="sidebar-button mobile-menu-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                 <path

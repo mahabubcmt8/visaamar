@@ -19,10 +19,10 @@ class AboutSection extends Model
     public static function getImageUrl($request)
     {
         self::$image = $request->file('image');
-        self::$imageName = self::$image->getClientOriginalName();
+        self::$imageName = time() . '-' . self::$image->getClientOriginalName(); // Optionally prepend time to ensure unique name
         self::$directory = 'about-image/';
-        self::$image->move(self::$directory, self::$imageName);
-        self::$imageUrl = self::$directory.self::$imageName;
+        self::$image->move(public_path(self::$directory), self::$imageName);
+        self::$imageUrl = self::$directory . self::$imageName;
         return self::$imageUrl;
     }
 
@@ -35,23 +35,23 @@ class AboutSection extends Model
     }
 
     public static function updateAbout($request, $id)
+{
+    self::$about = AboutSection::findOrFail($id); // Use the provided $id instead of hardcoding 1
+    if ($request->file('image'))
     {
-        self::$about = AboutSection::findOrFail(1);
-        if ($request->file('image'))
+        if (file_exists(public_path(self::$about->image)))
         {
-            if (file_exists(self::$about->image))
-            {
-                unlink(self::$about->image);
-            }
-            self::$imageUrl = self::getImageUrl($request);
+            unlink(public_path(self::$about->image));
         }
-        else
-        {
-            self::$imageUrl = self::$about->image;
-        }
-        self::$about->description = $request->description;
-        self::$about->image      = self::$imageUrl;
-        self::$about->save();
+        self::$imageUrl = self::getImageUrl($request);
     }
+    else
+    {
+        self::$imageUrl = self::$about->image;
+    }
+    self::$about->description = $request->description;
+    self::$about->image = self::$imageUrl;
+    self::$about->save();
+}
 
 }
