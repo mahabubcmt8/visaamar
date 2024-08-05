@@ -22,7 +22,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <form action="{{ route('admin.settings.country.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.settings.country.update', $country->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
             <div class="row">
                 <div class="col-md-12">
@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="">Country Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="name" placeholder="Enter Country Name" value="{{ old('name') }}">
+                                        <input type="text" class="form-control" name="name" placeholder="Enter Country Name" value="{{ $country->name }}">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -66,17 +66,33 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" name="info_key[]" class="form-control form-control-sm" placeholder="Name">
-                                                </td>
-                                                <td>
-                                                    <input type="text" name="info_value[]" class="form-control form-control-sm" placeholder="Value">
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
-                                                </td>
-                                            </tr>
+                                            @if (isset($countryExtraInfo))
+                                                @forelse ($countryExtraInfo as $item)
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="info_key[]" class="form-control form-control-sm" placeholder="Name" value="{{ $item->info_key }}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="info_value[]" class="form-control form-control-sm" placeholder="Value" value="{{ $item->info_value }}">
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
+                                                    </td>
+                                                </tr>
+                                                @empty
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="info_key[]" class="form-control form-control-sm" placeholder="Name">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="info_value[]" class="form-control form-control-sm" placeholder="Value">
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
+                                                    </td>
+                                                </tr>
+                                                @endforelse
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -99,17 +115,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <input type="text" name="visa_name[]" class="form-control form-control-sm" placeholder="Name">
-                                            </td>
-                                            <td>
-                                                <textarea type="number" name="description[]" class="form-control form-control-sm" placeholder="Description"></textarea>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
-                                            </td>
-                                        </tr>
+                                        @if (isset($countryVisa))
+                                            @forelse ($countryVisa as $item)
+                                            <tr>
+                                                <td>
+                                                    <input type="text" name="visa_name[]" class="form-control form-control-sm" placeholder="Name" value="{{ $item->visa_name }}">
+                                                </td>
+                                                <td>
+                                                    <textarea type="number" name="description[]" class="form-control form-control-sm" placeholder="Description">{{ $item->description }}</textarea>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
+                                                </td>
+                                            </tr>
+                                            @empty
+
+                                            @endforelse
+                                        @endif
                                     </tbody>
                                 </table>
                         </div>
@@ -130,17 +152,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <input type="text" name="document_name[]" class="form-control form-control-sm" placeholder="Name">
-                                            </td>
-                                            <td>
-                                                <textarea type="number" name="document_description[]" class="form-control form-control-sm document_description" placeholder="Description"></textarea>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
-                                            </td>
-                                        </tr>
+                                        @if (isset($documentRequirments))
+                                            @forelse ($documentRequirments as $item)
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="document_name[]" class="form-control form-control-sm" placeholder="Name" value="{{ $item->document_name }}">
+                                                    </td>
+                                                    <td>
+                                                        <textarea type="number" name="document_description[]" class="form-control form-control-sm document_description" placeholder="Description">{!! $item->document_description !!}</textarea>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="document_name[]" class="form-control form-control-sm" placeholder="Name">
+                                                    </td>
+                                                    <td>
+                                                        <textarea type="number" name="document_description[]" class="form-control form-control-sm document_description" placeholder="Description"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+                                        @endif
                                     </tbody>
                                 </table>
                         </div>
@@ -161,17 +199,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <input type="text" name="details[]" class="form-control form-control-sm" placeholder="Name">
-                                            </td>
-                                            <td>
-                                               <input type="file" class="form-control" name="document_photo[]">
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
-                                            </td>
-                                        </tr>
+                                        @if (isset($documentPhotos))
+                                            @forelse ($documentPhotos as $item)
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="details[]" class="form-control form-control-sm" placeholder="Name" value="{{ $item->details }}">
+                                                    </td>
+                                                    <td>
+                                                    <input type="file" class="form-control" name="document_photo[]">
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            @empty
+
+                                            <tr>
+                                                <td>
+                                                    <input type="text" name="details[]" class="form-control form-control-sm" placeholder="Name">
+                                                </td>
+                                                <td>
+                                                   <input type="file" class="form-control" name="document_photo[]">
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-danger" onclick="removeRow(this)">Delete</button>
+                                                </td>
+                                            </tr>
+                                            @endforelse
+                                        @endif
                                     </tbody>
                                 </table>
                         </div>
@@ -181,37 +236,37 @@
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <label for="">Eligibility to Apply for Visa</label>
-                                    <textarea name="eligibility_for_visa" id="summernote1" cols="30" rows="10"></textarea>
+                                    <textarea name="eligibility_for_visa" id="summernote1" cols="30" rows="10">{!! $country->eligibility_for_visa !!}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <label for="">Visa Fees & Service Charges</label>
-                                    <textarea name="fees_charges" id="summernote2" cols="30" rows="10"></textarea>
+                                    <textarea name="fees_charges" id="summernote2" cols="30" rows="10">{!! $country->fees_charges !!}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <label for="">Before Departure Requirements</label>
-                                    <textarea name="departure_requiremet" id="summernote3" cols="30" rows="10"></textarea>
+                                    <textarea name="departure_requiremet" id="summernote3" cols="30" rows="10">{!! $country->departure_requiremet !!}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <label for="">Processing Time</label>
-                                    <textarea name="processing_time" id="summernote4" cols="30" rows="10"></textarea>
+                                    <textarea name="processing_time" id="summernote4" cols="30" rows="10">{!! $country->processing_time !!}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <label for="">Important Contacts & Links</label>
-                                    <textarea name="contacts_links" id="summernote5" cols="30" rows="10"></textarea>
+                                    <textarea name="contacts_links" id="summernote5" cols="30" rows="10">{!! $country->contacts_links !!}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <label for="">Remarks</label>
-                                    <textarea name="remarks" id="summernote6" cols="30" rows="10"></textarea>
+                                    <textarea name="remarks" id="summernote6" cols="30" rows="10">{!! $country->remarks !!}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +275,7 @@
             </div>
             <div class="row justify-content-center my-5">
                 <div class="col-md-6">
-                    <button class="btn btn-primary btn-block w-100" type="submit">ADD DATA</button>
+                    <button class="btn btn-primary btn-block w-100" type="submit">UPDATE DATA</button>
                 </div>
             </div>
         </form>

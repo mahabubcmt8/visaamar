@@ -532,7 +532,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.tour.index') }}" class="nav-link {{ Request::is('admin/settings/company-info') ? 'active' : '' }}">
+                        <a href="{{ route('admin.settings.country.index') }}" class="nav-link {{ Request::is('admin/settings/company-info') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Manage Country</p>
                         </a>

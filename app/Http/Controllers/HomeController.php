@@ -8,6 +8,11 @@ use App\Models\Admin\PageBanner;
 use App\Models\AdsBanner;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Country;
+use App\Models\CountryExtraInfo;
+use App\Models\CountryVisa;
+use App\Models\DocumentAndPhotos;
+use App\Models\DocumentAndRequirments;
 use App\Models\Product;
 use App\Models\Tour;
 use Devfaysal\BangladeshGeocode\Models\District;
@@ -59,7 +64,16 @@ class HomeController extends Controller
 
     public function visa(){
         $pageTitle = companyInfo()->site_mettro;
-        return view('frontend.visa', compact('pageTitle'));
+        $countries = Country::oldest()->get();
+        return view('frontend.visa', compact('pageTitle', 'countries'));
+    }
+    public function visaData($id){
+        $data['country'] = Country::findOrFail($id);
+        $data['country_visa'] = CountryVisa::where('country_id', $data['country']->id)->get();
+        $data['country_extra_info'] = CountryExtraInfo::where('country_id', $data['country']->id)->get();
+        $data['document_and_photos'] = DocumentAndPhotos::where('country_id', $data['country']->id)->get();
+        $data['document_and_equirments'] = DocumentAndRequirments::where('country_id', $data['country']->id)->get();
+        return view('frontend.visa-data', $data);
     }
     public function about()
     {

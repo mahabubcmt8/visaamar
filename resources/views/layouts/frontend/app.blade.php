@@ -387,7 +387,7 @@
 
 
     <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="{{ asset('frontend/js/jquery-3.7.1.min.j') }}s"></script>
+    <script src="{{ asset('frontend/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery-ui.js') }}"></script>
     <script src="{{ asset('frontend/js/moment.min.js') }}"></script>
     <script src="{{ asset('frontend/js/daterangepicker.min.js') }}"></script>
@@ -435,6 +435,7 @@
         }
         window.onload = animateText;
     </script>
+    @stack('js')
 </body>
 
 <!-- Mirrored from demo-egenslab.b-cdn.net/html/triprex/preview/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Jun 2024 07:19:53 GMT -->

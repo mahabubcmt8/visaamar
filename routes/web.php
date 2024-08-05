@@ -11,6 +11,7 @@ use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendMailController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::get('/about-us', [HomeController::class, 'about'])->name('about_us');
 Route::get('/tours', [HomeController::class, 'tours'])->name('tours');
 Route::get('/tours/{slug}', [HomeController::class, 'tours_details'])->name('tours.details');
 Route::get('/visa', [HomeController::class, 'visa'])->name('visa');
+Route::get('/visa/data/{id}', [HomeController::class, 'visaData'])->name('visa.data');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact_us');
 // Route::post('/contact-us/mail/send', [MailController::class, 'index'])->name('contact_us_send_mail');
 Route::post('/contact-us/mail/send', [MailController::class, 'store'])->name('contact_us_store_mail');
@@ -111,6 +113,10 @@ Route::get('get/tele_code/{id}', [AjaxController::class, 'get_tele_code'])->name
 Route::get('get/rank', [AjaxController::class, 'get_rank'])->name('get.rank');
 
 Route::get('/test', [TestController::class, 'index'])->name('test');
+
+Route::get('/artisan-run', function(){
+    return Artisan::call('optimize:clear');
+});
 
 require __DIR__ . '/user.php';
 require __DIR__ . '/auth.php';

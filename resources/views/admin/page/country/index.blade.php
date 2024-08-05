@@ -32,20 +32,18 @@
                                     <h3 class="card-title text-light">{{ $pageTitle }}</h3>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <button type="button" id="addCountryModalBtn"  class="btn btn-success text-right"><i class="fas fa-plus-circle"></i> Add New</button>
+                                    <a href="{{ route('admin.settings.country.create') }}" class="btn btn-success text-right"><i class="fas fa-plus-circle"></i> Add New</a>
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table width='100%' class="table table-sm text-center" id="datatable">
+                            <table width='100%' class="table table-sm text-center table-striped" id="datatable">
                                 <thead>
                                     <tr>
                                         <th>SL</th>
-                                        <th>C. Name</th>
-                                        <th>Currency Name</th>
-                                        <th>Currency Symbol</th>
-                                        <th>Time Zone</th>
+                                        <th>Country Name</th>
+                                        <th>Flag</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
@@ -64,7 +62,6 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-    @include('admin.modals.add-Country')
 @endsection
 
 @push('js')
@@ -76,7 +73,7 @@
                 serverSide:true,
                 responsive:true,
                 ajax:{
-                url:"{{route('admin.settings.country.index')}}"
+                    url:"{{route('admin.settings.country.index')}}"
                 },
                 columns:[
                 {
@@ -90,16 +87,8 @@
                     name:'name',
                 },
                 {
-                    data:'currency_name',
-                    name:'currency_name',
-                },
-                {
-                    data:'currency_symbol',
-                    name:'currency_symbol',
-                },
-                {
-                    data:'timezone',
-                    name:'timezone',
+                    data:'flag',
+                    name:'flag',
                 },
                 {
                     data:'action',
